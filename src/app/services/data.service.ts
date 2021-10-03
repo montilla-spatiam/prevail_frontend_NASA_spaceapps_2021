@@ -11,7 +11,7 @@ import { Entries } from '../entries';
 
   const baseUrl =     'http://44.193.83.129:8000';
   const userUrl =     '/api/users/';
-  const regKeyUrl =   '/register/';
+  const regKeyUrl =   '/register';
   const logsUrl =     '/api/logs';
   const addUser =     '/add_user/';
   const oLogsUrl =    '/api/loglist'
