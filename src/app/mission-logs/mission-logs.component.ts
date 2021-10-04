@@ -12,6 +12,8 @@ import { CookieService } from '../services//cookie.service';
 export class MissionLogsComponent implements OnInit {
   displayedColumns: string[] = ['Mission', 'Activity', 'Entries', 'Users', 'Date and Author'];
   dataSource: LogDataSource = <any>[];
+  dataSource2 = <any>[];
+  username = <any>'';
 
   constructor(
     private data: DataService,
@@ -21,9 +23,7 @@ export class MissionLogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new LogDataSource(this.data);
-    this.dataSource.getLogs();
-
-    console.log(this.dataSource)
+    this.username = this.ls.get('username');
   }
 
   join_mission(uuid: string) {

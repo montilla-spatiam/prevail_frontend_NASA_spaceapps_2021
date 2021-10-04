@@ -1,5 +1,3 @@
-import { Entries } from "./entries";
-
 export interface Log {
   "id": "string",
   "description": "string",

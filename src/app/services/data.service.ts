@@ -70,14 +70,9 @@ export class DataService {
 
   public getUser(username: string, pw: string) {}
 
-  public getLog(oid?: string): Observable<Log[]> {
-    let urlString = baseUrl + myLogsUrl;
-    if (oid) {
-      urlString += '/' + oid;
-    }
-    return this.http
-      .get<Log[]>(urlString, {headers:this.httpOptions})
-      .pipe(catchError(this.handleError('getLog', [])));
+  public getLogs(): Observable<Log[]> {
+    return this.http.get<Log[]>(baseUrl + myLogsUrl, {headers: this.httpOptions})
+    .pipe(catchError(this.handleError('getLogs', [])));
   }
 
   public addLog(log: Log): Observable<Log> {

@@ -26,7 +26,7 @@
 		<ng-container *ngIf="dataSource.loading$ | async">
 			<mat-spinner></mat-spinner>
 		</ng-container>
-		<mat-table class="mission-logs-table" [dataSource]="dataSource" matSort matSortActive="Created"
+		<mat-table class="mission-logs-table" [dataSource]="dataSource" matSort matSortActive="Mission"
 			matSortDirection="asc" mastSortDisableClear>
 			<ng-container matColumnDef="Mission">
 				<mat-header-cell *matHeaderCellDef>Mission</mat-header-cell>
@@ -38,15 +38,15 @@
 			</ng-container>
 			<ng-container matColumnDef="Entries">
 				<mat-header-cell *matHeaderCellDef>Entries</mat-header-cell>
-				<mat-cell *matCellDef="let log">{{log.entries.length}}</mat-cell>
+				<mat-cell *matCellDef="let log">{{log.entries}}</mat-cell>
 			</ng-container>
 			<ng-container matColumnDef="Users">
 				<mat-header-cell *matHeaderCellDef>Users</mat-header-cell>
-				<mat-cell *matCellDef="let log">{{log.users.length}}</mat-cell>
+				<mat-cell *matCellDef="let log">{{log.users}}</mat-cell>
 			</ng-container>
 			<ng-container matColumnDef="Date and Author">
 				<mat-header-cell *matHeaderCellDef>Date and Author</mat-header-cell>
-				<mat-cell *matCellDef="let log">{{log.date_published}}<br>author goes here</mat-cell>
+				<mat-cell *matCellDef="let log">{{log.date_published}}<br>{{username}}</mat-cell>
 			</ng-container>
 			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 			<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
