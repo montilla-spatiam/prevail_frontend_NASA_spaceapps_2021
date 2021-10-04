@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 
 interface Name {
   value: string;
@@ -37,6 +38,9 @@ export class MenuBarComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   })
+
+  switchView: string = 'Timeline view';
+  color: ThemePalette = 'primary';
 
   constructor() { }
 
