@@ -12,7 +12,7 @@ import { Entries } from '../entries';
 const baseUrl = 'http://44.193.83.129:8000';
 const userUrl = '/api/users/';
 const regKeyUrl = '/register/';
-const logsUrl = '/api/logs';
+const logsUrl = '/api/logs/';
 const myLogsUrl = '/api/users/me';
 const loginUrl = '/auth/';
 const addUser = '/add_user/';
@@ -47,59 +47,19 @@ export class Data2Service {
       });
   }
 
-  // Test Registration Key
-  public validateKey(keyVal: string) {
-    return this.http
-      .get(baseUrl + regKeyUrl + keyVal + '/', { responseType: 'text' })
-      .pipe(catchError(this.handleError('checkKey', [])));
-  }
-
-  public login(username: string, password: string) {
-    return this.http
-      .post(baseUrl + loginUrl, { username: username, password: password })
-      //.pipe(catchError(this.handleError('checkKey', [])));
-  }
-
   public register(username: string, password: string) {
     return this.http
       .post(baseUrl + userUrl, { username: username, password: password })
   }
+
+  public join_mission(uuid:string) {
+    return this.http
+      .get(baseUrl + logsUrl + uuid + '/add_user', {headers:this.httpOptions})
+  }
+
+  public create_mission(description: string, tags: string) {
+    return this.http
+      .post(baseUrl + logsUrl, { users: [this.ls.get('username')], tags: tags, description: description}, {headers:this.httpOptions})
+  }
   
-  public createUser(userName: string, pw: string) {}
-
-  public getUser(username: string, pw: string) {}
-
-  public getLog(oid?: string): Observable<Log[]> {
-    let urlString = baseUrl + myLogsUrl;
-    if (oid) {
-      urlString += '/' + oid;
-    }
-    return this.http
-      .get<Log[]>(urlString, {headers:this.httpOptions})
-      .pipe(catchError(this.handleError('getLog', [])));
-  }
-
-  public addLog(log: Log): Observable<Log> {
-    return this.http
-      .post<Log>(baseUrl + logsUrl, log, {headers:this.httpOptions})
-      .pipe(catchError(this.handleError('postLog', log)));
-  }
-
-  public getOrderedLogList(oid?: string): Observable<Log[]> {
-    return this.http
-      .get<Log[]>(baseUrl + oLogsUrl + oid)
-      .pipe(catchError(this.handleError('getOrderedLogList', [])));
-  }
-
-  public getEntries(oid?: string): Observable<Entries[]> {
-    return this.http
-      .get<Entries[]>(baseUrl + entriesUrl + oid)
-      .pipe(catchError(this.handleError('getEntries', [])));
-  }
-
-  public addEntry(entry: Entries): Observable<Entries> {
-    return this.http
-      .post<Entries>(baseUrl + entriesUrl, entry, {headers:this.httpOptions})
-      .pipe(catchError(this.handleError('addEntry', entry)));
-  }
 }

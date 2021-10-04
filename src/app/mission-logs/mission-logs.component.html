@@ -1,4 +1,18 @@
 <div class="log-container">
+	<div>
+		<div>
+			<label for="uuid">UUID: </label>
+			<input type="text" #uuid required id="uuid">
+			<button (click)="join_mission(uuid.value)">Join Mission</button>
+		</div>
+		<div>
+			<label for="description">Description: </label>
+			<input type="text" #description required id="description">
+			<label for="tags">Tags: </label>
+			<input type="text" #tags required id="tags">
+			<button (click)="create_mission(description.value, tags.value)">Create Mission</button>
+		</div>
+	</div>
 	<div class="entry-container">
 		<app-entry-details></app-entry-details>
 	</div>

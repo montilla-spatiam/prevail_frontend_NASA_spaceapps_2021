@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Data2Service } from '../services/data2.service';
 import { LogDataSource } from './log-data-source';
 
 @Component({
@@ -12,7 +13,8 @@ export class MissionLogsComponent implements OnInit {
   dataSource: LogDataSource = <any>[];
 
   constructor(
-    private data: DataService
+    private data: DataService,
+    private data2: Data2Service
   ) { }
 
   ngOnInit(): void {
@@ -22,4 +24,15 @@ export class MissionLogsComponent implements OnInit {
     console.log(this.dataSource)
   }
 
+  join_mission(uuid: string) {
+    this.data2.join_mission(uuid).subscribe(async (data: any) => {
+      this.dataSource.getLogs();
+    }, error => {console.log(error)});
+  }
+
+  create_mission(description: string, tags: string) {
+    this.data2.create_mission(description, tags).subscribe(async (data: any) => {
+      this.dataSource.getLogs();
+    }, error => {console.log(error)});
+  }
 }
