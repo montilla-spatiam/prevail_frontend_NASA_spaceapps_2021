@@ -29,6 +29,6 @@ export class LogDataSource implements DataSource<Log> {
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
     )
-    .subscribe(logs => this.logSubject.next(logs))
+    .subscribe((logs:any) => {this.logSubject.next(logs['logs']); console.log(logs)})
   }
 }

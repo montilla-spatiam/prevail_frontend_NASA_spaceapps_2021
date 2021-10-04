@@ -36,9 +36,9 @@ export class LoginPageComponent implements OnInit {
 
   checkRegKey(regKeyVal: string) {
     this.data.validateKey(regKeyVal)
-      .subscribe((resp) => {
-        console.log(resp)
-        if (resp === 'Valid') {
+      .subscribe(data => {
+        console.log(data)
+        if (data === 'Valid') {
           this.regInvalid = false;
           this.regKeyView = false;
           this.loginView = !this.regKeyView;
@@ -50,15 +50,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(un: string, pw: string) {
-    // Currently there is no validation for users.
-    // We are just using a pre-generated token for
-    // this user, so we'll pretend that whatever input
-    // we receive is correct, and will hard code the
-    // auth token in the service for now.
-    this.regKeyView = false;
-    this.loginView = false;
-    this.ls.set('username', 'shawn')
-    this.loginSuccess.emit(true);
+    this.data.login(un, pw)
+      .subscribe(async (data:any) => {
+        await this.ls.set('username', un)
+        await this.ls.set('token', data['token'])
+        await this.data.updateHttpOptions()
+        this.regKeyView = false
+        this.loginView = false
+        this.loginSuccess.emit(true);
+      })
   }
 
   pretendToLogIn() {
