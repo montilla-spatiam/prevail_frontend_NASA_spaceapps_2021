@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from '../services//cookie.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 import { User } from '../user';
@@ -59,7 +59,7 @@ export class DataService {
   public login(username: string, password: string) {
     return this.http
       .post(baseUrl + loginUrl, { username: username, password: password })
-      .pipe(catchError(this.handleError('checkKey', [])));
+      //.pipe(catchError(this.handleError('checkKey', [])));
   }
 
   public createUser(userName: string, pw: string) {}
