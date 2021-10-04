@@ -12,6 +12,9 @@
 			<input type="text" #tags required id="tags">
 			<button (click)="create_mission(description.value, tags.value)">Create Mission</button>
 		</div>
+		<div>
+			<button (click)="log_out()">Log Out</button>
+		</div>
 	</div>
 	<div class="entry-container">
 		<app-entry-details></app-entry-details>
