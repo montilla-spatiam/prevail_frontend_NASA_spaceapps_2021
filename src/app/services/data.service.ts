@@ -59,7 +59,11 @@ export class DataService {
   public login(username: string, password: string) {
     return this.http
       .post(baseUrl + loginUrl, { username: username, password: password })
-      //.pipe(catchError(this.handleError('checkKey', [])));
+      .pipe(
+        catchError(err => {
+          this.handleError('checkKey', []);
+          return throwError(err);
+      }))
   }
 
   public createUser(userName: string, pw: string) {}

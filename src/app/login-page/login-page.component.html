@@ -18,8 +18,14 @@
     <div *ngIf="loginInvalid" class="alert">
       Invalid username or password
     </div>
-    <button (click)="login(username.value, password.value)">Login</button>
-    <button (click)="register(username.value, password.value)">Register</button>
+    <div *ngIf="registerInvalid" class="alert">
+      Username already exists
+    </div>
+    <div>
+      <button (click)="login(username.value, password.value)">Login</button>
+      <button (click)="register(username.value, password.value)">Register</button>
+    </div>
+
   </div>
 </ng-container>
 

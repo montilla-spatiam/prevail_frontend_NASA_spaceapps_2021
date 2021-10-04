@@ -13,6 +13,7 @@ export class LoginPageComponent implements OnInit {
 
   regKeyView = true; // Sets initial registration key login
   regInvalid = false; // Sets invalid message of registration key
+  registerInvalid = false; // Sets invalid message if username exists
 
   loginView = false; // Sets traditional login view
   loginInvalid = false; // Sets invalid login message
@@ -52,13 +53,13 @@ export class LoginPageComponent implements OnInit {
       this.regKeyView = false;
       this.loginView = false;
       this.loginSuccess.emit(true);
-    });
+    }, error => {this.loginInvalid = true;this.registerInvalid = false;});
   }
 
   register(un: string, pw: string) {
     this.data2.register(un, pw).subscribe(async (data: any) => {
       this.login(un, pw)
-    });
+    }, error => {this.registerInvalid = true;this.loginInvalid = false});
   }
 
   pretendToLogIn() {
