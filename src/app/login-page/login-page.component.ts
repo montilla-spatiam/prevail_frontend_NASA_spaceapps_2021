@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CookieService } from '../services//cookie.service';
 import { DataService } from '../services//data.service';
+import { Data2Service } from '../services//data2.service';
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +18,7 @@ export class LoginPageComponent implements OnInit {
   loginInvalid = false; // Sets invalid login message
   isNewUser = false; // Changes view to register new user
 
-  constructor(private data: DataService, private ls: CookieService) {}
+  constructor(private data: DataService,private data2: Data2Service, private ls: CookieService) {}
 
   ngOnInit(): void {
     if (this.ls.get('regKey')) {
@@ -51,6 +52,12 @@ export class LoginPageComponent implements OnInit {
       this.regKeyView = false;
       this.loginView = false;
       this.loginSuccess.emit(true);
+    });
+  }
+
+  register(un: string, pw: string) {
+    this.data2.register(un, pw).subscribe(async (data: any) => {
+      this.login(un, pw)
     });
   }
 
